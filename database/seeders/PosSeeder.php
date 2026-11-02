@@ -9,67 +9,46 @@ class PosSeeder extends Seeder
 {
     public function run(): void
     {
-        // Insert 5 sample customers
-        DB::table('customers')->insert([
-            [
-                'full_name'  => 'Maria Santos',
-                'email'      => 'maria.santos@example.com',
-                'phone'      => '09171234567',
-                'created_at' => now(),
-            ],
-            [
-                'full_name'  => 'John Reyes',
-                'email'      => 'john.reyes@example.com',
-                'phone'      => '09181234567',
-                'created_at' => now(),
-            ],
-            [
-                'full_name'  => 'Angela Cruz',
-                'email'      => 'angela.cruz@example.com',
-                'phone'      => '09191234567',
-                'created_at' => now(),
-            ],
-            [
-                'full_name'  => 'Daniel Garcia',
-                'email'      => 'daniel.garcia@example.com',
-                'phone'      => '09201234567',
-                'created_at' => now(),
-            ],
-            [
-                'full_name'  => 'Sofia Mendoza',
-                'email'      => 'sofia.mendoza@example.com',
-                'phone'      => '09211234567',
-                'created_at' => now(),
-            ],
-        ]);
+        // Sample Customers
+        $customers = [
+            ['full_name' => 'cs1', 'email' => 'cs1@example.com', 'phone' => '09171234567'],
+            ['full_name' => 'cs2', 'email' => 'cs2@example.com', 'phone' => '09182345678'],
+            ['full_name' => 'cs3', 'email' => 'cs3@example.com', 'phone' => '09193456789'],
+            ['full_name' => 'cs4', 'email' => 'cs4@example.com', 'phone' => '09204567890'],
+            ['full_name' => 'cs5', 'email' => 'cs5@example.com', 'phone' => '09215678901'],
+        ];
 
-        // Insert 5 sample users
-        DB::table('users')->insert([
-            [
-                'username'   => 'marias',
-                'full_name'  => 'Maria Santos',
-                'created_at' => now(),
-            ],
-            [
-                'username'   => 'johnr',
-                'full_name'  => 'John Reyes',
-                'created_at' => now(),
-            ],
-            [
-                'username'   => 'angelac',
-                'full_name'  => 'Angela Cruz',
-                'created_at' => now(),
-            ],
-            [
-                'username'   => 'danielg',
-                'full_name'  => 'Daniel Garcia',
-                'created_at' => now(),
-            ],
-            [
-                'username'   => 'sofiam',
-                'full_name'  => 'Sofia Mendoza',
-                'created_at' => now(),
-            ],
-        ]);
+        foreach ($customers as $customer) {
+            DB::table('customers')->updateOrInsert(
+                ['email' => $customer['email']],
+                [
+                    'full_name' => $customer['full_name'],
+                    'phone' => $customer['phone'],
+                    'created_at' => now(),
+                ]
+            );
+        }
+
+        // Sample Users
+        $users = [
+            ['username' => 'usr1', 'full_name' => 'User 1', 'email' => 'us1@example.com', 'role' => 'Admin', 'status' => 'Active'],
+            ['username' => 'usr2', 'full_name' => 'User 2', 'email' => 'us2@example.com', 'role' => 'Cashier', 'status' => 'Active'],
+            ['username' => 'usr3', 'full_name' => 'User 3', 'email' => 'us3@example.com', 'role' => 'Staff', 'status' => 'Active'],
+            ['username' => 'usr4', 'full_name' => 'User 4', 'email' => 'us4@example.com', 'role' => 'Cashier', 'status' => 'Inactive'],
+            ['username' => 'usr5', 'full_name' => 'User 5', 'email' => 'us5@example.com', 'role' => 'Staff', 'status' => 'Active'],
+        ];
+
+        foreach ($users as $user) {
+            DB::table('users')->updateOrInsert(
+                ['username' => $user['username']],
+                [
+                    'full_name' => $user['full_name'],
+                    'email' => $user['email'],
+                    'role' => $user['role'],
+                    'status' => $user['status'],
+                    'created_at' => now(),
+                ]
+            );
+        }
     }
 }
