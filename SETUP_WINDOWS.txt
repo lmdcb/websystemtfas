@@ -1,0 +1,18 @@
+WINDOWS QUICK START
+
+1. Open Command Prompt.
+2. Run: php -v
+3. Run: composer -V
+   If either is not recognized, install/configure a compatible PHP version and Composer first.
+4. Go to the folder where you want the project, e.g.: cd %USERPROFILE%\Desktop
+5. Run: composer create-project laravel/laravel pos-system
+6. Extract this starter ZIP and copy its files/folders INTO pos-system (merge folders and replace routes/web.php).
+7. Run: cd pos-system
+8. Run: php artisan serve
+9. Open: http://127.0.0.1:8000
+10. Check /, /about, /customers, /users and all navigation links.
+
+Optional database submission files are included in database/migrations and database/seeders.
+
+GitHub: push the generated Laravel project with the overlay. Never push .env or vendor.
+Hosting: choose a Laravel-capable PHP host, configure document root to public/, install dependencies, and set APP_KEY. A live URL is not included.
