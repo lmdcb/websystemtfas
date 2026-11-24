@@ -1,11 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/about', [PageController::class, 'about'])->name('about');
-Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
-Route::get('/users', [UserController::class, 'index'])->name('users');
+Route::view('/', 'home')->name('home');
+Route::view('/about', 'about')->name('about');
+Route::get('/dashboard', fn () => redirect()->route('customers.index'))
+    ->middleware('auth')->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::resource('customers', CustomerController::class)->except(['show']);
+    Route::resource('users', UserController::class)->except(['show']);
+});
+
+require __DIR__.'/auth.php';
